@@ -3,7 +3,7 @@ const { PermissionFlagsBits,  ApplicationCommandOptionType } = require("discord.
 module.exports = {
     name: "tban",
     description: "Wyrzuca użytkownika na określony czas",
-    type: CommandType.BOTH,
+    type: CommandType.SLASH,
     guildOnly: true,
     permissions: [PermissionFlagsBits.Administrator],
     minArgs: 2,
@@ -24,7 +24,10 @@ module.exports = {
     ],
     callback: ({args, interaction, channel}) => {
         const member = interaction.options.getMember("użytkownik");
+        const time = interaction.options.getNumber("czas");
         member.timeout(args[1] *60 *1000)
-        channel.send(`Pomyślnie ztimeoutowano ${'<@'+member.id+'>'}`)
+        return({
+            content: `Pomyślnie wyrzucono ${'<@'+member.id+'>'} na ${time} minut`, 
+        })
     },
 }

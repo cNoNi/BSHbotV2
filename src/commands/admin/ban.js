@@ -3,7 +3,7 @@ const { PermissionFlagsBits,  ApplicationCommandOptionType } = require("discord.
 module.exports = {
     name: "ban",
     description: "Banuje osobe",
-    type: CommandType.BOTH,
+    type: CommandType.SLASH,
     guildOnly: true,
     permissions: [PermissionFlagsBits.Administrator],
     minArgs: 1,
@@ -19,6 +19,9 @@ module.exports = {
     callback: ({interaction, channel}) => {
         const member = interaction.options.getUser("użytkownik");
         member.ban()
-        channel.send(`Pomyślnie zbanowano ${'<@'+member.id+'>'}`)
+        return({
+            content: `Pomyślnie zbanowano ${'<@'+member.id+'>'}`, 
+        })
+
     },
 }
