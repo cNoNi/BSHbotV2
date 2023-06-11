@@ -9,7 +9,6 @@ module.exports = {
 
   // Invoked when a user runs the ping command
   callback: ({channel}) => {
-
     const exampleEmbed = new EmbedBuilder()
       .setColor(0x0099FF)
       .setTitle('.Help')

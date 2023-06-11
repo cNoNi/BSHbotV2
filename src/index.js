@@ -27,9 +27,6 @@ client.on("ready", () => {
       dir: path.join(__dirname, "events"),
       
     },
-    
   });
-
 });
-
 client.login(process.env.TOKEN);
