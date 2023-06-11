@@ -18,13 +18,18 @@ client.on("ready", () => {
   client.user.setActivity('/help', { type: ActivityType.Playing });
   new WOK({
     client,
-    mongoUri: process.env.MONGO_URI || "",
+    debug: true,
+    mongoUri: process.env.MONGO_URI,
+    dbOptions: { useNewUrlParser: true,useUnifiedTopology: true},
     commandsDir: path.join(__dirname, "commands"),
     events: {
       // Where the events are stored
       dir: path.join(__dirname, "events"),
+      
     },
+    
   });
+
 });
 
 client.login(process.env.TOKEN);

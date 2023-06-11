@@ -9,7 +9,7 @@ module.exports = (client) => {}
 module.exports.addCoins = async (guildId, userId, coins) => {
       try {
         console.log('Running findOneAndUpdate()')
-  
+
         const result = await profileSchema.findOneAndUpdate(
           {
             guildId,
