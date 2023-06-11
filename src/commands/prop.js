@@ -16,6 +16,7 @@ module.exports = {
         description: 'Co proponujesz (krótko)',
         type: ApplicationCommandOptionType.String,
         maxLength: 14,
+        minLength: 1,
         required: true
     },
     {
