@@ -14,7 +14,7 @@
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3",
     "google-spreadsheet": "^3.3.0",
-    "nodemon": "^2.0.20",
+    "nodemon": "^3.0.1",
     "wokcommands": "^2.1.0"
   }
 }
