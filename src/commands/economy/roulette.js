@@ -1,21 +1,42 @@
-const { CommandType } = require("wokcommands");
+const { CommandType,CooldownTypes } = require("wokcommands");
 const {ButtonBuilder,ButtonStyle, ActionRowBuilder,ApplicationCommandOptionType, ComponentType,EmbedBuilder } = require('discord.js');
 const economy = require('../../misc/economy')
 
 module.exports = {
     name: "roulette",
+    aliases: ['roul'],
     description: "ruletka",
-    type: CommandType.LEGACY,
+    type: CommandType.SLASH,
     guildOnly: true,
-    callback: async ({interaction, client,message,channel}) => {
+    cooldowns: {
+        type: CooldownTypes.perGuild,
+        duration: "30 s",
+    },
+    minArgs: 1,
+    maxArgs: 1,
+    options: [
+        {
+            name: "kasa",
+            required: true,
+            description: 'Wartość zakładu',
+            type: ApplicationCommandOptionType.Number,
+        },
+    ],
+
+    callback: async ({interaction, client,message,channel,guild}) => {
+        const wzak = interaction.options.getNumber("kasa")
 
         const red = new ButtonBuilder().setLabel("Red").setStyle(ButtonStyle.Primary).setCustomId("Czerwony")
         const black = new ButtonBuilder().setLabel("Black").setStyle(ButtonStyle.Primary).setCustomId("Czarny")
         const white = new ButtonBuilder().setLabel("White").setStyle(ButtonStyle.Primary).setCustomId("Biały")
 
-        const btnRow = new ActionRowBuilder().addComponents(red,black)
+        const even = new ButtonBuilder().setLabel("Parzyste").setStyle(ButtonStyle.Primary).setCustomId("0")
+        const odd = new ButtonBuilder().setLabel("Nieparzyste").setStyle(ButtonStyle.Primary).setCustomId("1")
 
-        const r = await message.reply({content :"KYS", components: [btnRow] })
+        const pickRow = new ActionRowBuilder().addComponents(red,black,white)
+        const pick2Row = new ActionRowBuilder().addComponents(even,odd)
+
+        const r = await interaction.reply({content :`Rozpoczeła się gra w ruletkę, stawka to €${wzak}`, components: [pickRow,pick2Row] })
 
         // const filter = (i) => i.user.id == message.author.id
 
@@ -23,37 +44,57 @@ module.exports = {
 
         const wyg = Math.floor(Math.random() * 37)
 
-        collector.on('collect', (interaction) => {
-            // if(interaction.customId === "red"){
-            //     message.reply("red")
-            // } else if (interaction.customId === "black") {
-            //     message.reply("black")}
+        await collector.on('collect', (interaction) => {
             const wyb = interaction.customId
-	    interaction.reply(`<@${interaction.user.id}> wybrał ${wyb}`)
+            const havedCoins = economy.getCoins(guild.id, interaction.user.id)
+
+            if (isNaN(wzak)){
+                interaction.reply("Nie poprawna wartość to przekazania")
+                return
+            }
+    
+            if (wzak > havedCoins){
+                interaction.reply(`Nie masz ${wzak}`)
+                return
+            }
+
+	        interaction.reply(`<@${interaction.user.id}> wybrał ${wyb}`)
         })
+
         let wygr = "Wygrywają : \n\n"
         let prz = "Przegrani : \n\n"
-        collector.on('end', (collected) => {
+
+        await collector.on('end', (collected) => {
             console.log(wyg, ' ', getColorEuropeanRoulette(wyg))
+
             //console.log(collected);
+
             let nag = `Wygrywa **${wyg} ${getColorEuropeanRoulette(wyg)}** \n\n`
             collected.forEach((interaction) => {
-                if (interaction.customId === getColorEuropeanRoulette(wyg)){
+                if (interaction.customId === getColorEuropeanRoulette(wyg) || wyg%2===parseInt(interaction.customId)){
                     console.log(interaction.user.id,"/",interaction.customId, "\n")
                     wygr += `<@${interaction.user.id}> \n`
+                    const newBalance = economy.addCoins(
+                        guild.id,
+                        interaction.user.id,
+                        wzak *2
+                    )
                 } else {
                     console.log(interaction.user.id,"/",interaction.customId, "\n")
                     prz += `<@${interaction.user.id}> \n`
+                    const remaningCoins = economy.addCoins(
+                        guild.id,
+                        interaction.user.id,
+                        wzak * -1
+                    )
                 } 
 
-                
                 return{
                     content: channel.send(nag+wygr+prz)
                 }            
             })
 
         })
-
 
         function getColorEuropeanRoulette(number) {
             if (number === 0) {
@@ -63,7 +104,7 @@ module.exports = {
             } else if ((number >= 11 && number <= 18) || (number >= 29 && number <= 36)) {
               return number % 2 === 0 ? 'Czerwony' : 'Czarny';
             } else {
-              throw new Error('Invalid number. Must be between 0 and 36.');
+              throw new Error('Nieprawidłowy number');
             }
         }
     },
