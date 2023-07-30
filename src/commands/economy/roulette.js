@@ -19,7 +19,7 @@ module.exports = {
 
         // const filter = (i) => i.user.id == message.author.id
 
-        const collector = r.createMessageComponentCollector({ componentType: ComponentType.Button, time: 20*100, max: 36 });
+        const collector = r.createMessageComponentCollector({ componentType: ComponentType.Button, time: 20000, max: 36 });
 
         const wyg = Math.floor(Math.random() * 37)
 
@@ -29,7 +29,7 @@ module.exports = {
             // } else if (interaction.customId === "black") {
             //     message.reply("black")}
             const wyb = interaction.customId
-
+	    interaction.reply(`<@${interaction.user.id}> wybrał ${wyb}`)
         })
         let wygr = "Wygrywają : \n\n"
         let prz = "Przegrani : \n\n"
@@ -40,7 +40,7 @@ module.exports = {
             collected.forEach((interaction) => {
                 if (interaction.customId === getColorEuropeanRoulette(wyg)){
                     console.log(interaction.user.id,"/",interaction.customId, "\n")
-                    wygr += `<@interaction.user.id> \n`
+                    wygr += `<@${interaction.user.id}> \n`
                 } else {
                     console.log(interaction.user.id,"/",interaction.customId, "\n")
                     prz += `<@${interaction.user.id}> \n`
