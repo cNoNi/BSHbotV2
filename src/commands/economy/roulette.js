@@ -1,5 +1,5 @@
 const { CommandType,CooldownTypes } = require("wokcommands");
-const {ButtonBuilder,ButtonStyle, ActionRowBuilder,ApplicationCommandOptionType, ComponentType,EmbedBuilder } = require('discord.js');
+const {ButtonBuilder,ButtonStyle, ActionRowBuilder,ApplicationCommandOptionType, ComponentType} = require('discord.js');
 const economy = require('../../misc/economy')
 
 module.exports = {
@@ -20,6 +20,7 @@ module.exports = {
             required: true,
             description: 'Wartość zakładu',
             type: ApplicationCommandOptionType.Number,
+            minValue: 50
         },
     ],
 
@@ -44,33 +45,62 @@ module.exports = {
 
         const wyg = Math.floor(Math.random() * 37)
 
-        await collector.on('collect', (interaction) => {
-            const wyb = interaction.customId
-            const havedCoins = economy.getCoins(guild.id, interaction.user.id)
+        // await collector.on('collect', async (interaction) => {
+        //     console.log(interaction.user)
+        //         const wyb = interaction.customId
+        //         const havedCoins = economy.getCoins(guild.id, interaction.user.id)
+        //         if (isNaN(wzak)){
+        //             await interaction.reply("Nie poprawna wartość to przekazania")
+        //             return
+        //         }
+        
+        //         if (wzak > havedCoins){
+        //             interaction.reply(`Nie masz ${wzak}`)
+        //             return
+        //         }
 
-            if (isNaN(wzak)){
-                interaction.reply("Nie poprawna wartość to przekazania")
-                return
-            }
-    
-            if (wzak > havedCoins){
-                interaction.reply(`Nie masz ${wzak}`)
-                return
-            }
 
-	        interaction.reply(`<@${interaction.user.id}> wybrał ${wyb}`)
-        })
+
+	    //     interaction.reply(`<@${interaction.user.id}> wybrał ${wyb}`)
+        // })
+        const stoppedUsers = [];
+        collector.on('collect', async (interaction) => {
+            //console.log(interaction.user);
+            const wyb = interaction.customId;
+            const havedCoins = await economy.getCoins(guild.id, interaction.user.id);
+        
+            if (isNaN(wzak)) {
+              await interaction.reply("Niepoprawna wartość do przekazania");
+              stoppedUsers.push(interaction.user.id); // Add user to the stoppedUsers list
+              return;
+            }
+            console.log("\n\n Pieniądze pos " + havedCoins + " Wys zakładu " + wzak)
+            if (wzak > havedCoins) {
+                console.log("Stop")
+              await interaction.reply(`Nie masz ${wzak}`);
+              stoppedUsers.push(interaction.user.id); // Add user to the stoppedUsers list
+              return;
+            }
+        
+            await interaction.reply(`<@${interaction.user.id}> wybrał ${wyb}`);
+          });
 
         let wygr = "Wygrywają : \n\n"
         let prz = "Przegrani : \n\n"
 
         await collector.on('end', (collected) => {
+
             console.log(wyg, ' ', getColorEuropeanRoulette(wyg))
 
             //console.log(collected);
 
             let nag = `Wygrywa **${wyg} ${getColorEuropeanRoulette(wyg)}** \n\n`
+
             collected.forEach((interaction) => {
+                console.log(stoppedUsers)
+                if (stoppedUsers.includes(interaction.user.id)) {
+                    return; // Ignore interactions from users in the stoppedUsers list
+                  }
                 if (interaction.customId === getColorEuropeanRoulette(wyg) || wyg%2===parseInt(interaction.customId)){
                     console.log(interaction.user.id,"/",interaction.customId, "\n")
                     wygr += `<@${interaction.user.id}> \n`
@@ -89,10 +119,11 @@ module.exports = {
                     )
                 } 
 
-                return{
-                    content: channel.send(nag+wygr+prz)
-                }            
+          
             })
+            return{
+                content: channel.send(nag+wygr+prz)
+            }  
 
         })
 
