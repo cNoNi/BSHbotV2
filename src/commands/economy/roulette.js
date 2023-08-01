@@ -70,13 +70,12 @@ module.exports = {
             const havedCoins = await economy.getCoins(guild.id, interaction.user.id);
         
             if (isNaN(wzak)) {
-              await interaction.reply("Niepoprawna wartość do przekazania");
+              await interaction.reply("Niepoprawna wartość zakładu");
               stoppedUsers.push(interaction.user.id); // Add user to the stoppedUsers list
               return;
             }
             console.log("\n\n Pieniądze pos " + havedCoins + " Wys zakładu " + wzak)
             if (wzak > havedCoins) {
-                console.log("Stop")
               await interaction.reply(`Nie masz ${wzak}`);
               stoppedUsers.push(interaction.user.id); // Add user to the stoppedUsers list
               return;

@@ -1,5 +1,5 @@
 const { CommandType } = require("wokcommands");
-const { PermissionFlagsBits } = require("discord.js");
+const { PermissionFlagsBits, Message } = require("discord.js");
 
 module.exports = {
     name: "comdelete",
@@ -11,7 +11,7 @@ module.exports = {
     maxArgs: 1,
     expectedArgs: "<id komendy>",
 
-  callback: ({guild, client, args, channel}) => {
+  callback: ({guild, client, args, channel,message}) => {
     console.log(args)
     client.application.commands.fetch(args[0]) // id of your command
       .then( (command) => {
@@ -21,7 +21,7 @@ module.exports = {
     console.log(`Deleted command ${command.name}`)
     }).catch(console.error);
     return{
-        content: channel.send(`Pomyślnie wyjebano komendę.`),
+        content: message.reply(`Pomyślnie wyjebano komendę.`),
     }
   },
 }
