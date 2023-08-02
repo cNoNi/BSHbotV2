@@ -37,7 +37,6 @@ module.exports = {
           return
         }
     
-        //const guildId = message.guild.id
         const userId = mention.id
     
         const newCoins = await economy.addCoins(guild.id, userId, kasa)

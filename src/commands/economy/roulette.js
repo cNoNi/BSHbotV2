@@ -5,7 +5,7 @@ const economy = require('../../misc/economy')
 module.exports = {
     name: "roulette",
     aliases: ['roul'],
-    description: "ruletka",
+    description: "Ruletka",
     type: CommandType.SLASH,
     guildOnly: true,
     cooldowns: {
@@ -82,7 +82,7 @@ module.exports = {
             }
         
             await interaction.reply(`<@${interaction.user.id}> wybrał ${wyb}`);
-          });
+        });
 
         let wygr = "Wygrywają : \n\n"
         let prz = "Przegrani : \n\n"
