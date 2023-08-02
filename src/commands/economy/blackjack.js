@@ -110,7 +110,7 @@ module.exports = {
             
         })
 
-        collector.on("end", (collected) => {
+        collector.on("end", async (collected) => {
             if(collected.size === 0) {
                 channel.send(`<@${interaction.user.id}> nic nie wybrał`)
                 return
@@ -120,8 +120,10 @@ module.exports = {
                 channel.send(`<@${interaction.user.id}> zaliczyłeś remis.`)
             } else if(count(dealer)>= 22 && count(player)<=21) {
                 channel.send(`<@${interaction.user.id}> wygrywa €${zak}.`)
+                const newBalance = await economy.addCoins(guild.id,interaction.user.id,zak)
             } else {
                 channel.send(`**Diler** wygrywa. <@${interaction.user.id}> przegrywa €${zak}.`)
+                const remBalance = await economy.addCoins(guild.id,interaction.user.id,zak *-1)
             }
 
         })
