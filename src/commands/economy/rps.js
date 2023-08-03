@@ -41,7 +41,12 @@ module.exports = {
         const przec = interaction.options.getMember("gracz")
         const wyb1 = interaction.options.getString("wyb")
         const zak = interaction.options.getNumber("kasa")
-        const embed = new EmbedBuilder().setTitle("Papier kamień nożyce")
+
+        const embed = new EmbedBuilder().setTitle("Papier kamień nożyce").addFields(
+            {name: "Przeciwnik", value: `<@${przec.id}>`},
+            {name: "Warość zakładu", value: `€${zak}`},
+        )
+        .setFooter({text: "Kliknij przycisk poniżej by oddać głos"})
 
         const player1 = interaction.user
         const coinStartPlayer1 = await economy.getCoins(guild.id, interaction.user.id);

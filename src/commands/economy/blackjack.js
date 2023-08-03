@@ -89,7 +89,7 @@ module.exports = {
 
         collector.on("collect", (interaction) => {
             if(interaction.customId === "Hit") {
-                interaction.deferUpdate().then(console.log).catch(console.error)
+                interaction.deferUpdate().then().catch(console.error)
                 player.push(los())
                 sendEmbed()
 
@@ -104,7 +104,7 @@ module.exports = {
                     dealer.push(los())
                     sendEmbed()
                 }
-                interaction.deferUpdate().then(console.log).catch(console.error)
+                interaction.deferUpdate().then().catch(console.error)
                 collector.stop()
             }
             
@@ -136,6 +136,7 @@ module.exports = {
             if(used.includes(res)) {
                 los()
             } else {
+                console.log("Dobrano" + res)
                 used.push(res)
                 return res
             }
