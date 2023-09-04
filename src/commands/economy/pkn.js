@@ -86,7 +86,7 @@ module.exports = {
         const r = await interaction.reply({embeds: [embed], components: [pickRow] })
 
         const filter = (i) => i.user.id == przec.user.id
-        const collector = r.createMessageComponentCollector({ componentType: ComponentType.Button, time: 20_000, max: 1, filter });
+        const collector = r.createMessageComponentCollector({ componentType: ComponentType.Button, time: 20_000,max: 1 , filter });
         collector.on('collect', async (interaction) => {
             //const wyb2 = interaction.customId;
             interaction.deferUpdate().then().catch(console.error)
