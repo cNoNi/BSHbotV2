@@ -26,13 +26,13 @@ module.exports = {
         const collector = await r.createMessageComponentCollector({ componentType: ComponentType.Button,time: 10_000});
 
         collector.on("collect", (interaction) => {
-            interaction.reply("Kij ci w oko")
+            interaction.reply("Dodano do losowania")
         })
 
         collector.on("end", async (collected) => {
             collected.forEach(interaction => {
                 console.log(interaction.user.username)
-                const team = Boolean(Math.round(Math.random()));
+                var team = Math.random() < 0.5;
                 console.log(team)
                 if(team){
                     if(team1.length>=5){
@@ -55,7 +55,7 @@ module.exports = {
                     team2.push("Placeholder 2")
                 }
 
-                console.log(team1,team2)
+                //console.log(team1,team2)
                 embed.setFields(
                     {name: `Team 1`, value: `${team1.toString()}` },
                     {name: `Team 2`, value: `${team2.toString()}` }
