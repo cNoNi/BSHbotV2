@@ -1,9 +1,16 @@
 const fs = require("fs");
 
-module.exports = (message, instance) => {
-    try {    
-        //console.log(message.author.username)
-        const path = __dirname + '../../../data/log.json'
+require("dotenv/config");
+
+module.exports = (message,channel) => {
+    // console.log(message)
+    // if(message.content.indexOf("m!p")  >= 0 && message.channelId===process.env.MAIN){
+    //     message.channel.bulkDelete(3, true);
+    //     message.reply(`<#${process.env.MUZYKA}>`)
+    // }
+    // try {
+        //console.log(__dirname)
+        const path = __dirname + '/../../data/log.json'
 
         let existingData = [];
         if (fs.existsSync(path)) {
@@ -29,7 +36,7 @@ module.exports = (message, instance) => {
         fs.writeFileSync(path, jsonString, function (err) {
             console.log("Done")
         });
-    } catch (error) {
-        console.error(error.message);
-    }
+    // } catch (error) {
+    //     console.error(error.message);
+    // }
 };
