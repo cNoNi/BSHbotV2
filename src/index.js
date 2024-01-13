@@ -11,11 +11,18 @@ const client = new Client({
     IntentsBitField.Flags.MessageContent,
   ],
   partials: [Partials.Channel],
+  presence: { 
+    activities: [{ 
+      name: '/help', 
+      type: ActivityType.Playing 
+    }], 
+  status: 'online'
+  }
 });
 
 client.on("ready", () => {
   console.log("The bot is ready");
-  client.user.setActivity('/help', { type: ActivityType.Playing });
+  //client.user.setActivity('/help', { type: ActivityType.Playing });
   new WOK({
     client,
     debug: true,
