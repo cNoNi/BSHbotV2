@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 const profileSchema = require("../schema/profile.schema")
+const companySchema = require('../schema/company.schema')
 
 const coinsCache = {}
-
 
 module.exports = (client) => {}
 
@@ -103,4 +103,51 @@ module.exports.removeCoins = async (guildId, userId, coins) => {
             return newCoins
         }finally{
         }
+}
+
+module.exports.getCompany = async (guildId, name) => {
+    try {
+        const result = await companySchema.findOne({
+            guildId,
+            name
+        })
+
+        if (result) {
+            return result
+        }   else {
+            return false
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports.addMember = async (guildId,name,member) => {
+    const result = await companySchema.findOneAndUpdate(
+    {
+        name,
+        guildId,
+    }, 
+    {
+        $push: {members: member}
+    }
+    )
+    return result.members
+}
+
+module.exports.createCompany = async (guildId,name,owner) => {
+    try {
+        let coins = 0
+        const result = await companySchema.create(
+            {
+              name,
+              guildId,
+              owner,
+              coins,
+            })
+        result.members.push(owner)
+        result.save()
+    } catch (error) {
+        console.log(error)
+    }
 }
