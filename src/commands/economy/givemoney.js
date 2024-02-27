@@ -33,7 +33,7 @@ module.exports = {
         console.log(target.id)
 
         const coinsToGive = interaction.options.getNumber("kasa");
-        if (isNaN(coinsToGive)){
+        if (isNaN(coinsToGive) || coinsToGive < 0){
             interaction.reply("Nie poprawna wartość to przekazania")
             return
         }
