@@ -11,6 +11,10 @@ const profileSchema = mongoose.Schema({
       type: Number,
       required: true,
     },
+    company: {
+      type: String,
+      required: false,
+    }
 })
   
 module.exports = mongoose.model('profiles', profileSchema)

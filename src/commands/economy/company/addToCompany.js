@@ -40,6 +40,7 @@ module.exports = {
                     x=1
                 }
             });
+            
             if(x===1) return {content: interaction.reply("Gracz jest już w tej firmie.")}
             const w = await economy.addMember(guild.id,comp,target.id) 
             console.log(w)

@@ -66,6 +66,26 @@ module.exports.getCoins = async (guildId, userId) => {
         }
 }
 
+module.exports.playerCompany = async (guildId,owner) => {
+    try {
+        const result = await companySchema.findOne(
+            {
+                guildId,
+                owner
+            }
+        )
+        if(result){
+            return result.name
+        } else {
+            return []
+        }
+        
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports.removeCoins = async (guildId, userId, coins) => {
         try{
             console.log('Running findOne')
@@ -130,6 +150,9 @@ module.exports.addMember = async (guildId,name,member) => {
     }, 
     {
         $push: {members: member}
+    },
+    {
+        new:true,
     }
     )
     return result.members
@@ -144,9 +167,8 @@ module.exports.createCompany = async (guildId,name,owner) => {
               guildId,
               owner,
               coins,
+              members: [owner]
             })
-        result.members.push(owner)
-        result.save()
     } catch (error) {
         console.log(error)
     }
