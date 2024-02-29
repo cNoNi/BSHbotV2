@@ -43,6 +43,7 @@ module.exports = {
             
             if(x===1) return {content: interaction.reply("Gracz jest już w tej firmie.")}
             const w = await economy.addMember(guild.id,comp,target.id) 
+            const n = await economy.addCompanytoMember(guild.id,target.id,comp)
             console.log(w)
     
             return{

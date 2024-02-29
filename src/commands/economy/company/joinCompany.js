@@ -28,7 +28,11 @@ module.exports = {
             if(res){
                 res.forEach(element => {
                     if(element.compName==targetcomp) {
+                        if(res.company!=""){
+                            economy.removeMemberFromCompany(guild.id,member,targetcomp)
+                        }
                         economy.addMember(guild.id,targetcomp,member)
+                        economy.addCompanytoMember(guild.id,member,targetcomp)
                         invites.removeInvite(guild.id,member,targetcomp)
                         return true
                     }

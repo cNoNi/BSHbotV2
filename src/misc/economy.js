@@ -173,3 +173,57 @@ module.exports.createCompany = async (guildId,name,owner) => {
         console.log(error)
     }
 }
+
+module.exports.addCompanytoMember = async (guildId,memberId,targetcomp) => {
+    try {
+        const res = await profileSchema.findOneAndUpdate(
+            {
+                guildId,
+                memberId,
+            },
+            {
+                $set: {
+                    company: targetcomp
+                }
+            }
+        )
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports.removeCompanyFromMember = async (guildId,memberId,) => {
+    try {
+        const res = await profileSchema.findOneAndUpdate(
+            {
+                guildId,
+                memberId,
+            },
+            {
+                $set: {
+                    company: ""
+                }
+            }
+        )
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports.removeMemberFromCompany = async (guildId,memberId,compName) => {
+    try {
+        const res = await companySchema.findOneAndUpdate(
+            {
+                guildId,
+                compName
+            },
+            {
+                $pull: {
+                    members: memberId
+                }
+            }
+        )
+    } catch (error) {
+        
+    }
+}
