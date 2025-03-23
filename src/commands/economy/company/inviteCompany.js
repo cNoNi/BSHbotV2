@@ -37,7 +37,7 @@ module.exports = {
                 content: interaction.reply("Pomyślnie zaproszono do firmy.")
             }
         } catch (error) {
-            console.log(error)
+          //console.log(error)
         }
 
     }

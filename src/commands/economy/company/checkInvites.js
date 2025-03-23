@@ -32,7 +32,7 @@ module.exports = {
                 content: interaction.reply({embeds: [embed]})
             }
         } catch (error) {
-            console.log(error)
+          //console.log(error)
         }
 
     }

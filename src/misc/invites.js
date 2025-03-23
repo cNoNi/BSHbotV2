@@ -12,9 +12,9 @@ module.exports.createInvite = async (guildId,userId,compName) => {
                 compName
             }
         )
-        console.log(result)
+      //console.log(result)
     } catch (error) {
-        console.log(error)
+      //console.log(error)
     }
 }
 
@@ -32,7 +32,7 @@ module.exports.checkInvites = async (guildId,userId) =>{
             return false
         }
     } catch (error) {
-        console.log(error)
+      //console.log(error)
     }
 }
 

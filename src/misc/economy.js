@@ -8,7 +8,7 @@ module.exports = (client) => {}
 
 module.exports.addCoins = async (guildId, userId, coins) => {
       try {
-        console.log('Running findOneAndUpdate()')
+      //console.log('Running findOneAndUpdate()')
 
         const result = await profileSchema.findOneAndUpdate(
           {
@@ -28,7 +28,7 @@ module.exports.addCoins = async (guildId, userId, coins) => {
           }
         )
   
-        console.log('RESULT:', result)
+      //console.log('RESULT:', result)
   
         coinsCache[`${guildId}-${userId}`] = result.coins
   
@@ -40,20 +40,20 @@ module.exports.addCoins = async (guildId, userId, coins) => {
   
 module.exports.getCoins = async (guildId, userId) => {
         try{
-            console.log('Running findOne')
+          //console.log('Running findOne')
 
             const result = await profileSchema.findOne({
                 guildId,
                 userId
             })
 
-            console.log('Result:', result)
+          //console.log('Result:', result)
 
             let coins = 0
             if (result) {
                 coins = result.coins
             } else {
-                console.log('Inserting a document')
+              //console.log('Inserting a document')
                 await new profileSchema({
                     guildId,
                     userId,
@@ -82,20 +82,20 @@ module.exports.playerCompany = async (guildId,owner) => {
         
 
     } catch (error) {
-        console.log(error)
+      //console.log(error)
     }
 }
 
 module.exports.removeCoins = async (guildId, userId, coins) => {
         try{
-            console.log('Running findOne')
+          //console.log('Running findOne')
 
             const result = await profileSchema.findOne({
                 guildId,
                 userId
             })
 
-            console.log('Result:', result)
+          //console.log('Result:', result)
 
             let newCoins = 0
             if (result) {
@@ -112,7 +112,7 @@ module.exports.removeCoins = async (guildId, userId, coins) => {
                     coins: newCoins
                 })
             } else { 
-                console.log('Inserting a document')
+              //console.log('Inserting a document')
                 await new profileSchema({
                     guildId,
                     userId,
@@ -138,7 +138,7 @@ module.exports.getCompany = async (guildId, name) => {
             return false
         }
     } catch (error) {
-        console.log(error)
+      //console.log(error)
     }
 }
 
@@ -170,7 +170,7 @@ module.exports.createCompany = async (guildId,name,owner) => {
               members: [owner]
             })
     } catch (error) {
-        console.log(error)
+      //console.log(error)
     }
 }
 
@@ -188,7 +188,7 @@ module.exports.addCompanytoMember = async (guildId,memberId,targetcomp) => {
             }
         )
     } catch (error) {
-        console.log(error)
+      //console.log(error)
     }
 }
 
@@ -206,7 +206,7 @@ module.exports.removeCompanyFromMember = async (guildId,memberId,) => {
             }
         )
     } catch (error) {
-        console.log(error)
+      //console.log(error)
     }
 }
 

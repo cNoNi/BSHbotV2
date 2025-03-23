@@ -27,7 +27,7 @@ module.exports = {
     callback: async ({interaction, args,guild}) => {
 
         const target = interaction.options.getUser("uzytkownik");
-        console.log(target.id)
+      //console.log(target.id)
 
         const coinsToGive = interaction.options.getNumber("kasa");
         if (isNaN(coinsToGive) || coinsToGive < 0){

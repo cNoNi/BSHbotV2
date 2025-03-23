@@ -24,7 +24,7 @@ module.exports = {
             const member = interaction.user.id
             const targetcomp = interaction.options.getString("firma")
             const res = await invites.checkInvites(guild.id,member)
-            console.log(res)
+          //console.log(res)
             if(res){
                 res.forEach(element => {
                     if(element.compName==targetcomp) {
@@ -44,7 +44,7 @@ module.exports = {
             }
             return {content: "Pomyślnie dołączono do firmy."}
         } catch (error) {
-            console.log(error)
+          //console.log(error)
         }
 
     }

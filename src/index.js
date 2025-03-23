@@ -9,6 +9,8 @@ const client = new Client({
     IntentsBitField.Flags.GuildMessages,
     IntentsBitField.Flags.DirectMessages,
     IntentsBitField.Flags.MessageContent,
+    IntentsBitField.Flags.GuildMembers,
+    IntentsBitField.Flags.GuildVoiceStates
   ],
   partials: [Partials.Channel],
   presence: { 

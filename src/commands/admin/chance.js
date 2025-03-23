@@ -44,10 +44,10 @@ module.exports = {
         const value = random(options);
 
         const res = getH();
-        console.log(res)
+      //console.log(res)
         const shit = []
         for (let i = 0; i < 4*4; i=i+4) {
-            console.log(i)
+          //console.log(i)
             shit.push(`#${res[i]+res[i++]+res[i+2]+res[i+3]}`)
             
         }

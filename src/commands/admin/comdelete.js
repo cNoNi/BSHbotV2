@@ -15,12 +15,12 @@ module.exports = {
     expectedArgs: "<id komendy>",
 
   callback: ({guild, client, args, channel,message,interaction}) => {
-    console.log(args)
+  //console.log(args)
     client.application.commands.fetch(args[0])
       .then( (command) => {
-    console.log(`Fetched command ${command.name}`)
+  //console.log(`Fetched command ${command.name}`)
     command.delete()
-    console.log(`Deleted command ${command.name}`)
+  //console.log(`Deleted command ${command.name}`)
     }).catch(console.error);
     return{
         content: message.reply(`Pomyślnie wyjebano komendę.`),

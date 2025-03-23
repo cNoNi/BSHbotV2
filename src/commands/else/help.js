@@ -30,21 +30,21 @@ module.exports = {
   for (const file of commandFiles) {
     const command = require(__dirname + `/../../commands/economy/${file}`)
 
-    console.log(command.name)
+  //console.log(command.name)
     if (command.name) {
-      console.log(command.description)
+    //console.log(command.description)
       client.commands.set(command.name, command)
       table.addRow(file, "✔")
       exampleEmbed.addFields(
         {name: " ", value: `**${command.name}**` +" "+ command.description})
-      console.log(commandFiles)
+    //console.log(commandFiles)
     } else {
       table.addRow(file, "❌  -> brakuję 'nazwy'!")
       continue
     }
   }
 
-  console.log(table.toString())
+  //console.log(table.toString())
 
 
     return{

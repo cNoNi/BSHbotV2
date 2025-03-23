@@ -46,7 +46,7 @@ module.exports = {
         const wyg = Math.floor(Math.random() * 37)
 
         // await collector.on('collect', async (interaction) => {
-        //     console.log(interaction.user)
+        //   //console.log(interaction.user)
         //         const wyb = interaction.customId
         //         const havedCoins = economy.getCoins(guild.id, interaction.user.id)
         //         if (isNaN(wzak)){
@@ -74,7 +74,7 @@ module.exports = {
               stoppedUsers.push(interaction.user.id); // Add user to the stoppedUsers list
               return;
             }
-            console.log("\n\n Pieniądze pos " + havedCoins + " Wys zakładu " + wzak)
+          //console.log("\n\n Pieniądze pos " + havedCoins + " Wys zakładu " + wzak)
             if (wzak > havedCoins) {
               await interaction.reply(`Nie masz ${wzak}`);
               stoppedUsers.push(interaction.user.id); // Add user to the stoppedUsers list
@@ -89,19 +89,19 @@ module.exports = {
 
         await collector.on('end', (collected) => {
 
-            console.log(wyg, ' ', getColorEuropeanRoulette(wyg))
+          //console.log(wyg, ' ', getColorEuropeanRoulette(wyg))
 
             //console.log(collected);
 
             let nag = `Wygrywa **${wyg} ${getColorEuropeanRoulette(wyg)}** \n\n`
 
             collected.forEach((interaction) => {
-                console.log(stoppedUsers)
+              //console.log(stoppedUsers)
                 if (stoppedUsers.includes(interaction.user.id)) {
                     return; // Ignore interactions from users in the stoppedUsers list
                   }
                 if (interaction.customId === getColorEuropeanRoulette(wyg) || wyg%2===parseInt(interaction.customId)){
-                    console.log(interaction.user.id,"/",interaction.customId, "\n")
+                  //console.log(interaction.user.id,"/",interaction.customId, "\n")
                     wygr += `<@${interaction.user.id}> \n`
                     const newBalance = economy.addCoins(
                         guild.id,
@@ -109,7 +109,7 @@ module.exports = {
                         wzak *2
                     )
                 } else {
-                    console.log(interaction.user.id,"/",interaction.customId, "\n")
+                  //console.log(interaction.user.id,"/",interaction.customId, "\n")
                     prz += `<@${interaction.user.id}> \n`
                     const remaningCoins = economy.addCoins(
                         guild.id,

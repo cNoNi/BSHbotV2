@@ -31,9 +31,9 @@ module.exports = {
 
         collector.on("end", async (collected) => {
             collected.forEach(interaction => {
-                console.log(interaction.user.username)
+              //console.log(interaction.user.username)
                 var team = Math.random() < 0.5;
-                console.log(team)
+              //console.log(team)
                 if(team){
                     if(team1.length>=5){
                         team2.push(interaction.user.username)
@@ -47,7 +47,7 @@ module.exports = {
                         team2.push(interaction.user.username)
                     }
                 }
-                console.log(team1.length,team2.length)
+              //console.log(team1.length,team2.length)
 
                 if(team1.length<=0) {
                     team1.push("Placeholder 1")
@@ -61,7 +61,7 @@ module.exports = {
                     {name: `Team 2`, value: `${team2.toString()}` }
                 )
                 r.edit({embeds: [embed]})
-                console.log(team1,team2)
+              //console.log(team1,team2)
             });
         })
     }

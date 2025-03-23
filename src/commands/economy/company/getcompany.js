@@ -27,7 +27,7 @@ module.exports = {
                 content: interaction.reply("Firma o podanej nazwie nie istnieje.")
             }
         }
-        console.log(w)
+      //console.log(w)
         const embed = new EmbedBuilder()
         .setTitle("Informacje o firmie")
         .setColor(0x00ff00)

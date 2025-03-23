@@ -30,7 +30,7 @@ module.exports = {
             const target = mention
             const targetID = target.id
     
-            console.log('Target id:', targetID)
+          //console.log('Target id:', targetID)
     
             const guildId = guild.id
             const userId = target.id

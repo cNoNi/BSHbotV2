@@ -44,13 +44,13 @@ module.exports = {
             if(x===1) return {content: interaction.reply("Gracz jest już w tej firmie.")}
             const w = await economy.addMember(guild.id,comp,target.id) 
             const n = await economy.addCompanytoMember(guild.id,target.id,comp)
-            console.log(w)
+          //console.log(w)
     
             return{
                 content: interaction.reply("Pomyślnie dodano do firmy.")
             }
         } catch (error) {
-            console.log(error)
+          //console.log(error)
         }
 
     }

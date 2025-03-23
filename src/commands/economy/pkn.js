@@ -105,7 +105,7 @@ module.exports = {
                 channel.send(`<@${przec.user.id}> nic nie wybrał`)
                 return
             }
-            console.log(collected + `\n\n` + wyb2)
+          //console.log(collected + `\n\n` + wyb2)
             if(wyb1===wyb2){
                 channel.send(`Remis`)
                 return

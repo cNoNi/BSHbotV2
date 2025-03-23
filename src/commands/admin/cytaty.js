@@ -19,7 +19,7 @@ module.exports = {
             const chatHistory = formattedMessages.join('\n');
             fs.writeFile('cytaty.txt', chatHistory, function (err) {
                 if (err) throw err;
-                console.log('Zapisano cytaty do pliku');
+              //console.log('Zapisano cytaty do pliku');
             });
             return {
                 content: "Zapisano wszystkie cytaty",

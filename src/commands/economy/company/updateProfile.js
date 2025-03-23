@@ -16,7 +16,7 @@ module.exports = {
             //const res = await economy.addCompanytoMember(guild.id,member)
             //const res = await economy.removeCompanyFromMember(guild.id,member)
         } catch (error) {
-            console.log(error)
+          //console.log(error)
         }
 
     }

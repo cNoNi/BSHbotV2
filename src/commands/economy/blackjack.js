@@ -136,7 +136,7 @@ module.exports = {
             if(used.includes(res)) {
                 los()
             } else {
-                console.log("Dobrano" + res)
+              //console.log("Dobrano" + res)
                 used.push(res)
                 return res
             }
