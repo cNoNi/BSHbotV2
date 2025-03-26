@@ -30,12 +30,10 @@ module.exports = {
     const lastOnlineTimestamp = await intel.lastOnline(targetId)
 
     if(isNaN(lastOnlineTimestamp)){
-        embed.addFields({
-            name: "Ostatnio online", value:`${userMention(targetId)} `
-        })
+      embed.setDescription(`${target} byl ostatnio widziany chuj wie ile temu.`)
     } else{
-        const dist = formatDistanceStrict(lastOnlineTimestamp,date,{locale: pl})
-        embed.setDescription(`${target} byl ostatnio online ${dist} temu`)
+      const dist = formatDistanceStrict(lastOnlineTimestamp,date,{locale: pl})
+      embed.setDescription(`${target} byl ostatnio online ${dist} temu.`)
     }
     interaction.reply({embeds: [embed]})
   }}
