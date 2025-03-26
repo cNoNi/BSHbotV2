@@ -38,3 +38,32 @@ module.exports.userTime = async (user_id,time) => {
         console.log("Error with db: insert into vc_time_spent.")
     }
 }
+
+module.exports.usersOnline = async () => {
+    try{
+        return (await pool.query("select count(*) from vc_joins where joined_date=current_date;")).rows[0].count
+    } catch (error){
+        console.log("Error while getting online users: " +error)
+        return -1
+    }
+}
+
+module.exports.newQuote = async (content,author) => {
+    try{
+        await pool.query("insert into quotes (content, author) values ($1,$2);",[content,author])
+    }catch(error){
+        console.log("Error with adding quote to db" + error)
+    }
+}
+
+module.exports.lastOnline = async (user_id) => {
+    try {
+        const userLogs = (await pool.query("SELECT joined_at from vc_joins where user_id=$1;",[user_id]))
+        const sizeLogs = userLogs.rowCount
+        
+        return userLogs.rows[sizeLogs-1].joined_at
+    } catch (error) {
+        console.log("Error with lastOnline")
+    }
+
+}

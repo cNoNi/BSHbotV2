@@ -22,6 +22,7 @@ module.exports = async (oldMember, newMember) => {
         //  Check if user left channel
         if(oldMember.channelId !== null && newMember.channelId === null) {
             //console.log(newMember.id + " left channel")
+            if(oldMember.selfDeaf||oldMember.selfMute) return
             //  Get time in seconds
             const time = (now - activeUsers.get(userId))/1000
             await intel.userTime(userId,time)

@@ -18,7 +18,7 @@ pool.connect()
         await pool.query("CREATE TABLE IF NOT EXISTS vc_server_muted (user_id BIGINT NOT NULL,mute_date DATE NOT NULL DEFAULT CURRENT_DATE,mute_count INTEGER NOT NULL DEFAULT 1,PRIMARY KEY (user_id, mute_date));")
         await pool.query("CREATE TABLE IF NOT EXISTS stream_toggles (user_id BIGINT NOT NULL,stream_date DATE NOT NULL DEFAULT CURRENT_DATE,stream_count INTEGER NOT NULL DEFAULT 1,PRIMARY KEY (user_id, stream_date));")
         await pool.query("CREATE TABLE IF NOT EXISTS vc_time_spent (user_id BIGINT NOT NULL,time_date DATE NOT NULL DEFAULT CURRENT_DATE,time_count INTEGER NOT NULL DEFAULT 0,PRIMARY KEY (user_id, time_date));")
-
+        await pool.query("create table if not exists quotes (content text not null,author bigint not null,archive_date date not null default current_date);")
     }).catch(err => console.error("PostgreSQL connection error:", err));
 
 module.exports = pool;
