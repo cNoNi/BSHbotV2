@@ -3,7 +3,7 @@ const {ButtonBuilder,ButtonStyle, ActionRowBuilder,ApplicationCommandOptionType,
 
 module.exports = {
     name: "pnp",
-    description: "Wysyła wiadomość, każdy kto kliknie przycisk zostaje dodany do losowania",
+    description: "Narzędzie to tworzenia składów do 5vs5",
     aliasses: ["vs"],
     guildOnly: true,
     type: CommandType.SLASH,

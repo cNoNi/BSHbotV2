@@ -1,9 +1,7 @@
 const { CommandType } = require("wokcommands");
 const { EmbedBuilder,Collection } = require('discord.js');
 const { readdirSync } = require("fs")
-const ascii = require("ascii-table");
 
-const table = new ascii().setHeading("Command", "Load status")
 module.exports = {
   name: "help",
   description: "Wysyła wiadomość z wszystkimi dostępnymi komendami",
@@ -23,23 +21,23 @@ module.exports = {
     )
     
 
-    const commandFiles = readdirSync(__dirname + "/../../commands/economy/").filter((file) =>
+    const commandFiles = readdirSync(__dirname + "/../../commands/else/").filter((file) =>
     file.endsWith(".js"),
   )
 
   for (const file of commandFiles) {
-    const command = require(__dirname + `/../../commands/economy/${file}`)
+    const command = require(__dirname + `/../../commands/else/${file}`)
 
   //console.log(command.name)
     if (command.name) {
     //console.log(command.description)
       client.commands.set(command.name, command)
-      table.addRow(file, "✔")
+      //table.addRow(file, "✔")
       exampleEmbed.addFields(
         {name: " ", value: `**${command.name}**` +" "+ command.description})
     //console.log(commandFiles)
     } else {
-      table.addRow(file, "❌  -> brakuję 'nazwy'!")
+      //table.addRow(file, "❌  -> brakuję 'nazwy'!")
       continue
     }
   }

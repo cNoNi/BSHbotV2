@@ -3,7 +3,7 @@ const { CommandType } = require("wokcommands");
 const intel = require("../../misc/intel")
 
 module.exports = {
-  name: "online",
+  name: "who-was-online",
   description: "Sprawdza ile osób bylo dzis na kanale.",
   guildOnly: true,
   type: CommandType.SLASH,

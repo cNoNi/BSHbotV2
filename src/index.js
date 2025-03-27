@@ -32,9 +32,7 @@ client.on("ready", () => {
     dbOptions: { useNewUrlParser: true,useUnifiedTopology: true},
     commandsDir: path.join(__dirname, "commands"),
     events: {
-      // Where the events are stored
       dir: path.join(__dirname, "events"),
-      
     },
   });
 });

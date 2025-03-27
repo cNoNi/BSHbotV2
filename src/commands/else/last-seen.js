@@ -4,7 +4,7 @@ const intel = require("../../misc/intel");
 const {formatDistanceStrict} = require("date-fns")
 const {pl} = require("date-fns/locale")
 module.exports = {
-  name: "ostatnio-widziany",
+  name: "last-seen",
   description: "Sprawdza kiedy użytkownik był ostatni raz na kanale. Wartość orientacyjna",
   guildOnly: true,
   type: CommandType.SLASH,
