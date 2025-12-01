@@ -33,9 +33,10 @@ module.exports.userStreamOn = async (user_id) => {
 
 module.exports.userTime = async (user_id,time) => {
     try {
-        await pool.query("INSERT INTO vc_time_spent (uid,time_count) VALUES ($1,$2) ON CONFLICT (uid, time_date) DO UPDATE SET time_count = vc_time_spent.time_count + $2;",[user_id,Math.round(time)])
+        let time_int = parseInt(time)
+        await pool.query("INSERT INTO vc_time_spent (uid,time_count) VALUES ($1,$2) ON CONFLICT (uid, time_date) DO UPDATE SET time_count = vc_time_spent.time_count + $2;",[user_id,Math.round(time_int)])
     } catch (error) {
-        console.log(time)
+        //console.log(time)
         console.error("Error with db: insert into vc_time_spent: ", error)
         //console.log("Error with db: insert into vc_time_spent.")
     }
